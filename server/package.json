@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npx prisma generate",
     "start": "tsx server.ts",
     "serve": "nodemon --exec tsx server.ts",
     "build": "tsc"
