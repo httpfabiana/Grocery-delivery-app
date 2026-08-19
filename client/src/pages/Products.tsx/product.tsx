@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import type { Product } from "../../components/types";
-import { categoriesData, dummyProducts } from "../../assets/assets";
+import { categoriesData } from "../../assets/assets";
 import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ChevronDown, Home, Newspaper, SlidersHorizontal, XIcon } from "lucide-react";
+import { ChevronDown, Home, SlidersHorizontal, XIcon } from "lucide-react";
 import ProductCard from "../../components/Home/ProductCard";
 import Loading from "../../components/Loading/Loading";
 import FilterPanel from "../../components/FiilterPanel/FilterPanel";
+import api from "../../config/api";
+import toast from "react-hot-toast";
 
 
 const Products = () => {
@@ -30,8 +32,24 @@ const Products = () => {
 
   async function fetchProducts() {
     setLoading(true)
-    setProducts(dummyProducts.filter((p)=> p.category === category || category === ""))
-    setLoading(false)
+    try{
+     const params = new URLSearchParams()
+     if(category) params.set('category', category)
+     if(organic) params.set('organic', organic)
+     if(sort) params.set('sort', sort)
+     if(sort) params.set('sort', sort)
+     if(maxPrice) params.set('maxPrice', maxPrice)
+      params.set("page", String(page))
+      params.set("limit", "12")
+
+     const {data} = await api.get(`/products?${params.toString()}`)
+     setProducts(data.products)
+     setTotalPages(data.pages)
+    }catch(error: any) {
+     toast.error(error?.response?.data?.message || error?.message)
+    }finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -131,14 +149,14 @@ const Products = () => {
                 Try adjusting your filters or search terms
               </p>
               <button onClick={clearFilters}
-              className="px-5 py-33 text-sm font-medium bg-app-green text-white rounded-xl hover:bg-app-green-light transition-colors">
+              className="px-30 py-20 text-sm font-medium bg-app-green text-white rounded-xl hover:bg-app-green-light transition-colors">
                 Clear Filters
               </button>
              </div>
            ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-8">
               {products.map((product) => product.stock > 0 && (
-                <ProductCard key={product._id} product={product}/>
+                <ProductCard key={product.id} product={product}/>
               ))}
             </div>
            )}

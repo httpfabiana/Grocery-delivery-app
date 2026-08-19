@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { footerData } from "../../assets/assets";
 
 
-
 const Footer = () => {
 
    return (

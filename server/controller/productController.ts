@@ -26,7 +26,7 @@ import { Request, Response } from 'express';
 
   //GET api/products
  export const getProducts = async (req: Request, res: Response) => {
-   const {category, search, minPrice, maxPrice, sort} = req.body;
+   const {category, search, minPrice, maxPrice, sort} = req.query;
 
    const where: any = {};
    if(category && category !== "all") where.category = category as string;
@@ -106,12 +106,15 @@ import { Request, Response } from 'express';
  //DELETE api/products/:id
 
  export const deleteProduct = async(req: Request, res: Response) => {
-   await prisma.product.delete(
+   await prisma.product.update(
     {
      where: {
       id: req.params.id as string
+     },
+     data: {
+      stock: Number(0)
      }
     }
    )
-   res.json({message: "Deleted"})
+   res.json({message: "Product Updated"})
  }

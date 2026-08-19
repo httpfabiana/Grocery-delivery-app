@@ -31,9 +31,9 @@ interface CartContextType {
 
       function addToCart(product: Product, quantity = 1) {
        setItems((prev) => {
-         const existing = prev.find((item) => item.product._id === product._id)
+         const existing = prev.find((item) => item.product.id === product.id)
            if(existing) {
-             return prev.map((item) => (item.product._id === product._id ? 
+             return prev.map((item) => (item.product.id === product.id ? 
            {...item, quantity: item.quantity + quantity} : item))
          }
          return [...prev, {product,quantity}]
@@ -42,7 +42,7 @@ interface CartContextType {
      }
 
      function removeFromCart(productId: string) {
-      setItems((prev) => prev.filter((item) => item.product._id !== productId))
+      setItems((prev) => prev.filter((item) => item.product.id !== productId))
      }
 
      function updateQuantity(productId: string, quantity: number) {
@@ -50,7 +50,7 @@ interface CartContextType {
         removeFromCart(productId)
         return;
        }
-        setItems((prev) => prev.map((item) => (item.product._id === productId ? 
+        setItems((prev) => prev.map((item) => (item.product.id === productId ? 
          {...item, quantity}: item
         )))
      }

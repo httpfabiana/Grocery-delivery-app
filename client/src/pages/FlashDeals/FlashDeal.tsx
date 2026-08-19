@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import type { Product } from "../../components/types";
-import { dummyProducts } from "../../assets/assets";
 import { Zap } from "lucide-react";
 import Loading from "../../components/Loading/Loading";
 import ProductCard from "../../components/Home/ProductCard";
+import api from "../../config/api";
+import toast from "react-hot-toast";
 
 
 const FlashDeals = () => {
@@ -13,13 +14,13 @@ const FlashDeals = () => {
    const [loading, setLoading] = useState(true)
 
    useEffect(() => {
-    setProducts(dummyProducts.filter((p: any) => p.stock > 0))
-    setTimeout(() => setLoading(false), 1000)
+    api.get("/products/flash-deals").then((res) => setProducts(res.data.products)).catch((error: any) => 
+     toast.error(error.response.data.message || error?.message)).finally(() => setLoading(false))
    },[])
 
   return (
      <div className="min-h-screen bg-app-cream">
-      <div className="bg-linear-to-r from-app-orange to-app-orange-dark text-white py-10">
+      <div className="bg-linear-to-r from-app-orange to-app-orange-dark text-white">
 
        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="flex-center gap-2 mb-3">
@@ -47,7 +48,7 @@ const FlashDeals = () => {
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4">
               {products.map((product) => product.stock > 0 && (
-               <ProductCard key={product._id} product={product}/>
+               <ProductCard key={product.id} product={product}/>
               ))}
             </div>
           )
