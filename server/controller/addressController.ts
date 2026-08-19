@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 import { prisma } from "../config/prisma.js";
 
 //GET endereço do user
-//GET api/addresses
 export const getAddresses = async(req: Request, res: Response) => {
   
   const addresses = await prisma.address.findMany(
@@ -19,8 +18,7 @@ export const getAddresses = async(req: Request, res: Response) => {
   res.json({addresses})
 }
 
-//Add endereço
-//POST api/addresses
+//Add adiciona endereço
 export const addAddress = async(req: Request, res: Response) => {
   const {label, address, city, state, zip, isDefault, lat, lng} = req.body;
 
@@ -78,8 +76,7 @@ export const addAddress = async(req: Request, res: Response) => {
    res.status(201).json({addAddress})
 }
 
-//Update endereço
-//PUT api/addresses/:id
+//Update atualizar endereço
 export const updateAddress = async(req: Request, res: Response) => {
   const {label, address, city, state, zip, isDefault, lat, lng} = req.body;
 
@@ -135,8 +132,7 @@ export const updateAddress = async(req: Request, res: Response) => {
   res.json({addresses})
 }
 
-//DELETE endereço
-// DELETE api/addresses/:id
+//DELETE deletar endereço
 
 export const deleteAddress = async(req: Request, res: Response) => {
   try{

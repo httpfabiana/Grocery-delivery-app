@@ -8,7 +8,7 @@ const generateToken = (id: string) => {
   return Jwt.sign({id}, process.env.JWT_SECRET as string, {expiresIn: "30d"})
 }
 
-//Check if user is admin
+//Check se o user e admin
 const getAdminStatus = (email: string | null | undefined): boolean => {
     if(!email) return false;
 
@@ -53,7 +53,8 @@ export const register = async (req: Request, res: Response) => {
 
    res.status(201).json({user: userData, token})
 }
- //LOGIN
+
+ //Criar login
 export const Login = async (req: Request, res: Response) => {
    const {email, password} = req.body;
 

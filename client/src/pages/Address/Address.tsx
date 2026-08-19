@@ -8,7 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 import api from "../../config/api";
 import toast from "react-hot-toast";
 
-const Address = () => {
+const Addresses = () => {
    const {updateUser} = useAuth()
 
    const [addresses, setAddresses] = useState<Address[]>([])
@@ -154,4 +154,4 @@ const Address = () => {
   )
 }
 
-export default Address; 
+export default Addresses; 

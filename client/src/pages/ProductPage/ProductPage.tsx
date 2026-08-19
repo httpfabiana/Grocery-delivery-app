@@ -34,11 +34,13 @@ const ProductPage = () => {
     window.scrollTo(0,0)
     
     api.get(`/products/${id}`).then(({data}) => {
-     setProduct(data.product);
-     return api.get(`/products?category=${data.product.category}`)
+      setProduct(data.product);
+      return api.get(`/products?category=${data.product.category}`)
     }).then(({data}) => {
       setRelatedProducts(data.products.filter((product: Product) => product.id !== id))
+
     }).catch(() => navigate("/products")).finally(() => setLoading(false))
+
    },[id, navigate])
 
    if(loading) return <Loading/>
@@ -53,6 +55,10 @@ const ProductPage = () => {
    const categoryLabel = product.category.replace(/-/g, " ")
 
    function handleMinus() {
+    if(!product) {
+     return <Loading/>
+    }
+
     if(inCart) {
      if(cartItem.quantity > 1) updateQuantity(product.id, cartItem.quantity - 1)
       else removeFromCart(product.id)
@@ -62,6 +68,10 @@ const ProductPage = () => {
    }
 
    function handlePlus() {
+    if(!product) {
+     return <Loading/>
+    }
+
     if(inCart) updateQuantity(product.id, cartItem.quantity + 1)
       else setLocalQuantity(localQuantity + 1)
    }
@@ -135,8 +145,12 @@ const ProductPage = () => {
               }`}/>
             ))}
           </div>
-          <span className="text-sm font-medium">{product.rating}</span>
-          <span className="text-sm text-app-text-light">({product.reviewCount} reviews)</span>
+          <span className="text-sm font-medium">
+            {product.rating}
+          </span>
+          <span className="text-sm text-app-text-light">
+            ({product.reviewCount} reviews)
+          </span>
          </div>
         )}
 
@@ -196,8 +210,12 @@ const ProductPage = () => {
         <section className="mt-12 mb-44">
          <div className="flex items-center justify-between mb-6">
          <div>
-          <h2 className="text-2xl font-semibold text-app-green">Related Products</h2>
-          <p className="text-sm text-app-text-light mt-1">More from {categoryLabel}</p>
+          <h2 className="text-2xl font-semibold text-app-green">
+            Related Products
+          </h2>
+          <p className="text-sm text-app-text-light mt-1">
+            More from {categoryLabel}
+          </p>
          </div>
          <Link className="text-sm font-semibold text-app-orange hover:text-app-orange-dark flex items-center gap-1 transition-colors" to={`/products?category=${product.category}`}>
           View All <ArrowRightIcon className="size-4"/>

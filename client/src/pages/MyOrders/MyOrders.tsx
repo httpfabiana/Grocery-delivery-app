@@ -17,7 +17,7 @@ const MyOrders = () => {
 
    const [loading, setLoading] = useState(true)
 
-   const [activeTab, setActiveTab] = useState("all")
+   const [activeTab] = useState("all")
 
    const [searchParams, setSearchParams] = useSearchParams()
 
@@ -56,7 +56,9 @@ const MyOrders = () => {
   return (
     <div className="min-h-screen bg-app-cream mb-20">
      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-       <h1 className="text-2xl font-semibold text-app-green mb-6">My Orders</h1>
+       <h1 className="text-2xl font-semibold text-app-green mb-6">
+         My Orders
+       </h1>
 
        <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
         {tabs.map((tab) => (
@@ -87,11 +89,15 @@ const MyOrders = () => {
           <Link key={order.id} to={`/orders/${order.id}`} className="block max-w-4xl bg-white rounded-2xl p-5 hover:shadow transition-all">
             <div className="flex items-start justify-between mb-3">
              <div>
-              <p className="text-sm font-medium text-app-green">Order #{order.id.slice(-8).toUpperCase()}</p>
+              <p className="text-sm font-medium text-app-green">
+                Order #{order.id.slice(-8).toUpperCase()}
+              </p>
 
               <div className="flex items-center gap-2 mt-1">
                 <CalendarIcon className="size-4 text-app-text-light"/>
-                <span>{new Date(order.createdAt). toLocaleDateString("pt-BR", {month: "short", day: "numeric", year: "numeric"})}</span>
+                <span>
+                  {new Date(order.createdAt). toLocaleDateString("pt-BR", {month: "short", day: "numeric", year: "numeric"})}
+                </span>
               </div>
              </div>
 
@@ -111,6 +117,7 @@ const MyOrders = () => {
                  alt="" 
                  className="size-12 sm:size-16 rounded-lg object-cover border border-app-border"/>
               ))}
+              
               {order.items.length > 4 && 
               <div className="size-12 sm:size-16 rounded-lg bg-app-cream flex-center text-xs font-semibold text-app-text-light">
                 +{order.items.length -4}

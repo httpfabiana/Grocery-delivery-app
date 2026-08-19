@@ -47,7 +47,6 @@ export const loginPartner = async (req: Request, res: Response) => {
 }
 
 //GET atribui entrega
-//GET api/delivery/my-deliveries
 
 export const getMyDeliveries = async (req: Request, res: Response) => {
   const { status } = req.query;
@@ -81,7 +80,6 @@ export const getMyDeliveries = async (req: Request, res: Response) => {
 }
 
 //GET detalhe de entrega unica
-//GET api/delivery/my-delivery/:id
 export const getDeliveryDetail = async (req: Request, res: Response) => {
   const order = await prisma.order.findFirst(
    {
@@ -107,8 +105,6 @@ export const getDeliveryDetail = async (req: Request, res: Response) => {
 }
 
 //Concluir entrega com otp
-//PUT api/delivery/my-deliveries/:id
-
 export const completeDelivery = async(req: Request, res: Response) => {
   const {otp} = req.body;
 
@@ -149,8 +145,7 @@ export const completeDelivery = async(req: Request, res: Response) => {
      res.json({ order: updateOrder, message: "Delivery completed successfully"})
 }
 
-//Cancel delivery
-//PUT api/delivery/my-deliveries/:id
+//Cancelar delivery
 export const cancelDelivery = async(req: Request, res: Response) => {
   const {reason} = req.body;
 
@@ -189,8 +184,7 @@ export const cancelDelivery = async(req: Request, res: Response) => {
     res.json({ order: updateOrder, message: "Delivery cancelled"})
 }
 
-//PUT order status
-//PUT api/delivery/my-deliveries/:id
+//Atualizar status do pedido
 export const updateDeliveryStatus = async(req: Request, res: Response) => {
  const { status } = req.body;
 
@@ -229,8 +223,7 @@ export const updateDeliveryStatus = async(req: Request, res: Response) => {
     res.json({ order: updateOrder})
 }
 
-//PUT live location
-//PUT api/delivery/my-deliveries/:id
+//Atualizar localização
 export const updateLocation = async(req: Request, res: Response) => {
   const { lat, lng} = req.body;
   const order = await prisma.order.findFirst(

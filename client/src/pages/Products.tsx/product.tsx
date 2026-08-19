@@ -58,6 +58,7 @@ const Products = () => {
   
    function updateFilter (key: string, value: string) {
     const newParams = new URLSearchParams(searchParams)
+
     if(value) {
      newParams.set(key, value)
     }else {
@@ -86,7 +87,9 @@ const Products = () => {
          <Home className="size-5"/>
         </Link>
         <span>/</span>
-        <span className="text-app-green font-medium">{activeCategory ? activeCategory.name : "All Products"}</span>
+        <span className="text-app-green font-medium">
+          {activeCategory ? activeCategory.name : "All Products"}
+        </span>
        </nav>
 
        <div className="flex gap-8 xl:gap-10">
@@ -144,14 +147,18 @@ const Products = () => {
             <Loading/>
            ) : products.length === 0 ? (
              <div className="text-center py-16">
-              <p className="text-lg font-semibold text-app-green mb-2">No products found</p>
+              <p className="text-lg font-semibold text-app-green mb-2">
+                No products found
+              </p>
               <p className="text-sm text-app-text-light mb-4">
                 Try adjusting your filters or search terms
               </p>
+
               <button onClick={clearFilters}
               className="px-30 py-20 text-sm font-medium bg-app-green text-white rounded-xl hover:bg-app-green-light transition-colors">
                 Clear Filters
               </button>
+
              </div>
            ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-8">
@@ -182,7 +189,9 @@ const Products = () => {
 
          <div className="fixed bottom-0 left-0 right-0 bg-white z-50 rounded-t-2xl max-h-[80vh] overflow-y-auto animate-slide-in-up">
           <div className="flex items-center justify-between p-4 border-b border-app-border">
-            <h3 className="text-lg font-semibold text-app-green">Filters</h3>
+            <h3 className="text-lg font-semibold text-app-green">
+              Filters
+            </h3>
             <button onClick={() => setMobileFitersOpen(false)} className="p-2 hover:bg-app-cream rounded-lg">
               <XIcon className="size-5"/>
             </button>

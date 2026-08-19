@@ -4,8 +4,7 @@ import { prisma } from "../config/prisma.js";
 import { inngest } from "../inngest/index.js";
 
 
-//POST /api/orders
-
+//Criar pedidos
 export const createOrder = async(req: Request, res: Response) => {
   const {items, shippingAddress, paymentMethod} = req.body;
 
@@ -28,7 +27,7 @@ export const createOrder = async(req: Request, res: Response) => {
 
   products.forEach((product: any) => (productMap[product.id] = product))
 
-  //check se a produto no stock
+  //check se tem produto no stock
   for(const item of items) {
    const product = productMap[item.product]
    if(!product || (product.stock ?? 0) < item.quantity) {
@@ -77,6 +76,7 @@ export const createOrder = async(req: Request, res: Response) => {
     data: {stock: {decrement: item.quantity}}
    })
   }
+
   //Envie atualizaçoes do estoque para cada produto do pedido
   for(const item of orderItems) {
   await inngest.send(
@@ -98,8 +98,7 @@ export const createOrder = async(req: Request, res: Response) => {
   )
 }
 
-//GET api/orders
-
+//Pegar pedidos do user
 export const getUserOrders = async (req: Request, res: Response) => {
   const { status } = req.query;
 
@@ -132,9 +131,7 @@ export const getUserOrders = async (req: Request, res: Response) => {
 
 }
 
- //GET pedido unico
- //GET /api/orders/:id
-
+ //Pegar pedido unico
  export const getOrder = async(req: Request, res: Response) => {
   const order = await prisma.order.findFirst({
    where: {
@@ -158,9 +155,7 @@ export const getUserOrders = async (req: Request, res: Response) => {
    res.json({order})
  }
 
- //UPDATE status do pedido(admin)
- //PUT /api/orders/:id/status
-
+ //Atualizar status do pedido(admin)
  export const updateOrderStatus = async(req: Request, res: Response) => {
    const {status, note} = req.body;
 
@@ -192,9 +187,7 @@ export const getUserOrders = async (req: Request, res: Response) => {
     res.json({order: updateOrder})
  }
 
- //GET todos pedidos(admin)
- //GET /api/orders/all
-
+ //Listar todos pedidos(admin)
  export const getAllOrders = async (req: Request, res: Response) => {
 
   const orders = await prisma.order.findMany(
@@ -228,9 +221,7 @@ export const getUserOrders = async (req: Request, res: Response) => {
 
 }
 
- //GET localização do pedido
- //GET /api/orders/:id/location
-
+ //Pegar localização do pedido
  export const getOrderLocation = async(req: Request, res: Response) => {
   const order = await prisma.order.findFirst(
    {

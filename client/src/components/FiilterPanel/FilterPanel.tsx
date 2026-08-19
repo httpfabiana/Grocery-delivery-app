@@ -1,6 +1,6 @@
 
 
-const FilterPanel = ({categories, category, minPrice, maxPrice, updateFilter, clearFilters, hasFilters} : any) => {
+const FilterPanel = ({categories, category, minPrice, maxPrice, updateFilter, hasFilters} : any) => {
 
    const categoriesWithAll = [{slug: "", name: "All Categories"}, ...categories]
 
