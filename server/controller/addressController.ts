@@ -89,7 +89,7 @@ export const addAddress = async (req: Request, res: Response) => {
 
     res.status(500).json({
       message: "Error adding address",
-      error: error instanceof Error ? error.message : error
+      error: error instanceof Error ? error.message : String(error)
     });
   }
 };
