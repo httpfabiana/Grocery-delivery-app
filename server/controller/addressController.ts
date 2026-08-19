@@ -19,53 +19,80 @@ export const getAddresses = async(req: Request, res: Response) => {
 }
 
 //Add adiciona endereço
-export const addAddress = async(req: Request, res: Response) => {
-  const {label, address, city, state, zip, isDefault} = req.body;
+export const addAddress = async (req: Request, res: Response) => {
+  try {
+    console.log("🔥 ADD ADDRESS FOI CHAMADO");
+    console.log("BODY:", req.body);
+    console.log("USER:", req.user);
 
-  const currentAddresses = await prisma.address.findMany(
-   {
-    where: {
-     userId: req.user!.id
-    }
-   }
-  )
-  let makeDefault = isDefault;
-  if(currentAddresses.length === 0) makeDefault = true;
+    const {
+      label,
+      address,
+      city,
+      state,
+      zip,
+      isDefault,
+      lat,
+      lng
+    } = req.body;
 
-  if(makeDefault) {
-   await prisma.address.updateMany({
-    where: {
-     userId: req.user!.id
-    },
-    data: {
-     isDefault: false
+    const currentAddresses = await prisma.address.findMany({
+      where: {
+        userId: req.user!.id
+      }
+    });
+
+    let makeDefault = isDefault;
+
+    if (currentAddresses.length === 0) {
+      makeDefault = true;
     }
-   })
+
+    if (makeDefault) {
+      await prisma.address.updateMany({
+        where: {
+          userId: req.user!.id
+        },
+        data: {
+          isDefault: false
+        }
+      });
+    }
+
+    await prisma.address.create({
+      data: {
+        userId: req.user!.id,
+        label,
+        address,
+        city,
+        state,
+        zip,
+        isDefault: makeDefault,
+        lat: lat != null ? Number(lat) : null,
+        lng: lng != null ? Number(lng) : null
+      }
+    });
+
+    const addresses = await prisma.address.findMany({
+      where: {
+        userId: req.user!.id
+      },
+      orderBy: {
+        createdAt: "asc"
+      }
+    });
+
+    res.status(201).json({ addresses });
+
+  } catch (error) {
+    console.error("🔥 ERRO AO ADICIONAR ENDEREÇO:", error);
+
+    res.status(500).json({
+      message: "Error adding address",
+      error: error instanceof Error ? error.message : error
+    });
   }
-   await prisma.address.create({
-    data: {
-     userId: req.user!.id,
-     label,
-     address,
-     city,
-     state,
-     zip,
-     isDefault: makeDefault,
-    }
-   })
-
-   const addresses = await prisma.address.findMany(
-    {
-     where: {
-      userId: req.user!.id,
-     },
-     orderBy: {
-      createdAt: "asc"
-     }
-    }
-   )
-   res.status(201).json({addresses})
-}
+};
 
 //Update atualizar endereço
 export const updateAddress = async(req: Request, res: Response) => {
