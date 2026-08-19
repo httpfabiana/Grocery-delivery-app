@@ -234,8 +234,8 @@ export type AddressGroupByOutputType = {
   state: string
   zip: string
   isDefault: boolean
-  lat: number
-  lng: number
+  lat: number | null
+  lng: number | null
   createdAt: Date
   updatedAt: Date
   _count: AddressCountAggregateOutputType | null
@@ -272,8 +272,8 @@ export type AddressWhereInput = {
   state?: Prisma.StringFilter<"Address"> | string
   zip?: Prisma.StringFilter<"Address"> | string
   isDefault?: Prisma.BoolFilter<"Address"> | boolean
-  lat?: Prisma.FloatFilter<"Address"> | number
-  lng?: Prisma.FloatFilter<"Address"> | number
+  lat?: Prisma.FloatNullableFilter<"Address"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Address"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Address"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Address"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -288,8 +288,8 @@ export type AddressOrderByWithRelationInput = {
   state?: Prisma.SortOrder
   zip?: Prisma.SortOrder
   isDefault?: Prisma.SortOrder
-  lat?: Prisma.SortOrder
-  lng?: Prisma.SortOrder
+  lat?: Prisma.SortOrderInput | Prisma.SortOrder
+  lng?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -307,8 +307,8 @@ export type AddressWhereUniqueInput = Prisma.AtLeast<{
   state?: Prisma.StringFilter<"Address"> | string
   zip?: Prisma.StringFilter<"Address"> | string
   isDefault?: Prisma.BoolFilter<"Address"> | boolean
-  lat?: Prisma.FloatFilter<"Address"> | number
-  lng?: Prisma.FloatFilter<"Address"> | number
+  lat?: Prisma.FloatNullableFilter<"Address"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Address"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Address"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Address"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -323,8 +323,8 @@ export type AddressOrderByWithAggregationInput = {
   state?: Prisma.SortOrder
   zip?: Prisma.SortOrder
   isDefault?: Prisma.SortOrder
-  lat?: Prisma.SortOrder
-  lng?: Prisma.SortOrder
+  lat?: Prisma.SortOrderInput | Prisma.SortOrder
+  lng?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.AddressCountOrderByAggregateInput
@@ -346,8 +346,8 @@ export type AddressScalarWhereWithAggregatesInput = {
   state?: Prisma.StringWithAggregatesFilter<"Address"> | string
   zip?: Prisma.StringWithAggregatesFilter<"Address"> | string
   isDefault?: Prisma.BoolWithAggregatesFilter<"Address"> | boolean
-  lat?: Prisma.FloatWithAggregatesFilter<"Address"> | number
-  lng?: Prisma.FloatWithAggregatesFilter<"Address"> | number
+  lat?: Prisma.FloatNullableWithAggregatesFilter<"Address"> | number | null
+  lng?: Prisma.FloatNullableWithAggregatesFilter<"Address"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Address"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Address"> | Date | string
 }
@@ -360,8 +360,8 @@ export type AddressCreateInput = {
   state: string
   zip: string
   isDefault?: boolean
-  lat: number
-  lng: number
+  lat?: number | null
+  lng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutAddressesInput
@@ -376,8 +376,8 @@ export type AddressUncheckedCreateInput = {
   state: string
   zip: string
   isDefault?: boolean
-  lat: number
-  lng: number
+  lat?: number | null
+  lng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -390,8 +390,8 @@ export type AddressUpdateInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutAddressesNestedInput
@@ -406,8 +406,8 @@ export type AddressUncheckedUpdateInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -421,8 +421,8 @@ export type AddressCreateManyInput = {
   state: string
   zip: string
   isDefault?: boolean
-  lat: number
-  lng: number
+  lat?: number | null
+  lng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -435,8 +435,8 @@ export type AddressUpdateManyMutationInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -450,8 +450,8 @@ export type AddressUncheckedUpdateManyInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -567,8 +567,8 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -583,8 +583,8 @@ export type AddressCreateWithoutUserInput = {
   state: string
   zip: string
   isDefault?: boolean
-  lat: number
-  lng: number
+  lat?: number | null
+  lng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -597,8 +597,8 @@ export type AddressUncheckedCreateWithoutUserInput = {
   state: string
   zip: string
   isDefault?: boolean
-  lat: number
-  lng: number
+  lat?: number | null
+  lng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -641,8 +641,8 @@ export type AddressScalarWhereInput = {
   state?: Prisma.StringFilter<"Address"> | string
   zip?: Prisma.StringFilter<"Address"> | string
   isDefault?: Prisma.BoolFilter<"Address"> | boolean
-  lat?: Prisma.FloatFilter<"Address"> | number
-  lng?: Prisma.FloatFilter<"Address"> | number
+  lat?: Prisma.FloatNullableFilter<"Address"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Address"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Address"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Address"> | Date | string
 }
@@ -655,8 +655,8 @@ export type AddressCreateManyUserInput = {
   state: string
   zip: string
   isDefault?: boolean
-  lat: number
-  lng: number
+  lat?: number | null
+  lng?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -669,8 +669,8 @@ export type AddressUpdateWithoutUserInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -683,8 +683,8 @@ export type AddressUncheckedUpdateWithoutUserInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -697,8 +697,8 @@ export type AddressUncheckedUpdateManyWithoutUserInput = {
   state?: Prisma.StringFieldUpdateOperationsInput | string
   zip?: Prisma.StringFieldUpdateOperationsInput | string
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lat?: Prisma.FloatFieldUpdateOperationsInput | number
-  lng?: Prisma.FloatFieldUpdateOperationsInput | number
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -793,8 +793,8 @@ export type $AddressPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     state: string
     zip: string
     isDefault: boolean
-    lat: number
-    lng: number
+    lat: number | null
+    lng: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["address"]>

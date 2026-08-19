@@ -20,13 +20,7 @@ export const getAddresses = async(req: Request, res: Response) => {
 
 //Add adiciona endereço
 export const addAddress = async(req: Request, res: Response) => {
-  const {label, address, city, state, zip, isDefault, lat, lng} = req.body;
-
-  if(lat == null || lng == null) {
-   return res.status(400).json(
-    {message: "Location coordinates are required. Please allow location access."}
-    )
-  }
+  const {label, address, city, state, zip, isDefault} = req.body;
 
   const currentAddresses = await prisma.address.findMany(
    {
@@ -48,7 +42,6 @@ export const addAddress = async(req: Request, res: Response) => {
     }
    })
   }
-
    await prisma.address.create({
     data: {
      userId: req.user!.id,
@@ -58,8 +51,6 @@ export const addAddress = async(req: Request, res: Response) => {
      state,
      zip,
      isDefault: makeDefault,
-     lat: Number(lat),
-     lng: Number(lng)
     }
    })
 
@@ -73,7 +64,7 @@ export const addAddress = async(req: Request, res: Response) => {
      }
     }
    )
-   res.status(201).json({addAddress})
+   res.status(201).json({addresses})
 }
 
 //Update atualizar endereço
