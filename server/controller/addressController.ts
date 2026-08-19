@@ -59,6 +59,16 @@ export const addAddress = async (req: Request, res: Response) => {
       });
     }
 
+    return res.status(200).json({
+  userId: req.user?.id,
+  label,
+  address,
+  city,
+  state,
+  zip,
+  isDefault: makeDefault,
+});
+
     await prisma.address.create({
       data: {
         userId: req.user!.id,
