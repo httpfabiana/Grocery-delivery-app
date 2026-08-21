@@ -6,7 +6,7 @@ const AddressForm = ({resetForm, handleSubmit, form, setForm, editingId}: any) =
     <>
      <div className="fixed inset-0 bg-black/40 z-50"/>
 
-     <div onSubmit={handleSubmit} className="fixed inset-0 z-50 flex-center p-4">
+     <div className="fixed inset-0 z-50 flex-center p-4">
        <form onClick={e => e.stopPropagation()} onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 w-full max-w-lg animate-fade-in">
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-lg font-semibold text-app-green">
