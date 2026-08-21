@@ -42,7 +42,7 @@ export const addAddress = async (req: Request, res: Response) => {
       }
     });
 
-    let makeDefault = isDefault;
+    let makeDefault = isDefault ?? false;
 
     if (currentAddresses.length === 0) {
       makeDefault = true;
@@ -58,16 +58,6 @@ export const addAddress = async (req: Request, res: Response) => {
         }
       });
     }
-
-    return res.status(200).json({
-  userId: req.user?.id,
-  label,
-  address,
-  city,
-  state,
-  zip,
-  isDefault: makeDefault,
-});
 
     await prisma.address.create({
       data: {

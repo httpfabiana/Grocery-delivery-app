@@ -24,7 +24,7 @@ const OrderTracking = () => {
    const [liveLocation, setLiveLocation] = useState<{lat: number; lng: number} | null>(null)
 
    useEffect(() => {
-     api.get(`/order/${id}`).then((res) => setOrder(res.data.order)).catch(() => 
+     api.get(`/orders/${id}`).then((res) => setOrder(res.data.order)).catch(() => 
       navigate("/orders")).finally(() => setLoading(false))
    }, [id, navigate])
 

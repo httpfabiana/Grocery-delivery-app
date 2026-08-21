@@ -40,8 +40,10 @@ const Addresses = () => {
 
      }else {
       const {data} = await api.post(`/addresses`, payload);
-      setAddresses(data.addresses)
-      updateUser({addresses: data.addresses})
+      console.log("🔥 RESPONSE:", data);
+      console.log("🔥 ADDRESSES:", data.addresses);
+      setAddresses(data?.addresses ?? [])
+      //updateUser({addresses: data.addresses})
       toast.success("Address added")
      }
      

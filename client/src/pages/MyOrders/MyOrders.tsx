@@ -11,7 +11,7 @@ import api from "../../config/api";
 
 const MyOrders = () => {
 
-   const currency = import.meta.env.VITE_CURRENCTY_SYMBOL || "$";
+   const currency = import.meta.env.VITE_CURRENCY_SYMBOL || "$";
 
    const [orders, setOrders] = useState<Order[]>([])
 

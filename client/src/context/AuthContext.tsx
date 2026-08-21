@@ -62,7 +62,7 @@ export function AuthProvider({children}: {children: ReactNode}) {
       })
       setUser(data.user)
       setToken(data.token)
-      localStorage.setItem("auth_toke", data.token)
+      localStorage.setItem("auth_token", data.token)
       localStorage.setItem("auth_user", JSON.stringify(data.user))
       toast.success("Registration successful")
       navigate("/")

@@ -96,7 +96,7 @@ const Checkout = () => {
        lng: defaultAddr?.lng
       })
      }
-   },[])
+   },[user])
 
     if(items.length === 0){
       return (
