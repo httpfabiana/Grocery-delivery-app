@@ -9,6 +9,9 @@ const NavBar = () => {
   
    const {user, logout,} = useAuth()
 
+   console.log("🔥 NAVBAR USER:", user);
+   console.log("🔥 NAVBAR IS ADMIN:", user?.isAdmin);
+
    const {cartCount, setIsCartOpen} = useCart()
 
    const [searchQuery, setSearchQuery] = useState("")

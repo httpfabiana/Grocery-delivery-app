@@ -41,6 +41,12 @@ export function AuthProvider({children}: {children: ReactNode}) {
        email,
        password
       })
+
+      console.log("🔥 LOGIN DATA:", data);
+      console.log("🔥 LOGIN USER:", data.user);
+      console.log("🔥 IS ADMIN:", data.user?.isAdmin);
+
+      
       setUser(data.user)
       setToken(data.token)
       localStorage.setItem("auth_token", data.token)
