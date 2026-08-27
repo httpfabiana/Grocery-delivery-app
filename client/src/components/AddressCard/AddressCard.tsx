@@ -39,7 +39,9 @@ interface AddressCardProps {
 
        <div>
         <div className="flex items-center gap-2 mb-1">
-         <p className="text-sm font-semibold text-app-green">{addr.label}</p>   
+         <p className="text-sm font-semibold text-app-green">
+          {addr.label}
+         </p>   
          {addr.isDefault && (
            <span className="flex-center gap-1 px-2.5 py-0.5 text-[10px] font-medium bg-app-green text-white rounded-full">
              <CheckIcon className="size-2.5"/>

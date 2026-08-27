@@ -22,9 +22,12 @@ const CartSidebar = () => {
 
     <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-50 shadow-2xl flex flex-col animate-slide-in-right"> 
      <div className="flex items-center justify-between p-5 border-b border-app-border">
+
      <div className="flex items-center gap-2">
        <ShoppingBagIcon className="size-5"/>
-       <h2 className="text-lg font-medium">Your Cart</h2>
+       <h2 className="text-lg font-medium">
+         Your Cart
+       </h2>
        <span className="px-2 py-0.5 text-xs font-semibold bg-app-cream rounded-full">
         {items.length} items
      </span>

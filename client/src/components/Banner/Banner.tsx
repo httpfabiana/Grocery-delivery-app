@@ -24,6 +24,7 @@ const Banner = () => {
               Free delivery on orders above $20
             </span>
            </div>
+           
            <span className="hidden sm:inline text-white/40"></span>
            <div className="flex text-center gap-1">
             <ZapIcon className="size-3.5 fill-yellow-400 text-yellow-400 shrink-0"/>

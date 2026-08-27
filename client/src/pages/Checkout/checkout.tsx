@@ -135,7 +135,9 @@ const Checkout = () => {
               }`}
               >
               <s.icon className="size-4"/> {s.label}
-              {i < steps.length - 1 && <ChevronRightIcon className="size-4 text-app-text-light"/>}
+              {i < steps.length - 1 && 
+                <ChevronRightIcon className="size-4 text-app-text-light"/>
+              }
              </button>
             </div>
           ))}

@@ -16,17 +16,20 @@ export default function CheckoutReview({ address, items, handlePlaceOrder, loadi
     return (
         <div className="bg-white rounded-2xl p-6 animate-fade-in">
             <h2 className="text-lg font-semibold text-app-green mb-5 flex items-center gap-2">
-                <CheckIcon className="size-5" /> Review Your Order
+              <CheckIcon className="size-5" /> 
+              Review Your Order
             </h2>
 
             {/* Delivery Info */}
             <div className="mb-5 p-4 bg-app-cream rounded-xl">
                 <div className="flex items-center gap-2 mb-2">
-                    <TruckIcon className="size-4 text-app-green" />
-                    <span className="text-sm font-semibold text-app-green">Delivery Address</span>
+                 <TruckIcon className="size-4 text-app-green" />
+                 <span className="text-sm font-semibold text-app-green">
+                    Delivery Address
+                 </span>
                 </div>
                 <p className="text-sm text-app-text-light">
-                    {address.label} — {address.address}, {address.city}, {address.state} {address.zip}
+                  {address.label} — {address.address}, {address.city}, {address.state} {address.zip}
                 </p>
             </div>
 
@@ -36,10 +39,16 @@ export default function CheckoutReview({ address, items, handlePlaceOrder, loadi
                     <div key={item.product.id} className="flex items-center gap-3">
                         <img src={item.product.image} alt={item.product.name} className="size-12 rounded-lg object-cover" />
                         <div className="flex-1">
-                            <p className="text-sm font-medium text-app-green">{item.product.name}</p>
-                            <p className="text-xs text-app-text-light">Qty: {item.quantity}</p>
+                          <p className="text-sm font-medium text-app-green">
+                           {item.product.name}
+                         </p>
+                          <p className="text-xs text-app-text-light">
+                            Qty: {item.quantity}
+                         </p>
                         </div>
-                        <span className="text-sm font-semibold">{currency}{(item.product.price * item.quantity).toFixed(2)}</span>
+                        <span className="text-sm font-semibold">
+                          {currency}{(item.product.price * item.quantity).toFixed(2)}
+                      </span>
                     </div>
                 ))}
             </div>
