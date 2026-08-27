@@ -1,10 +1,8 @@
 
 import  bcrypt  from 'bcrypt';
-
 import { Request, Response } from "express"
 import { prisma } from "../config/prisma.js"
-import { stat } from 'node:fs';
-import { timeStamp } from 'node:console';
+
 
 //GET dados do painel dashboard
 export const getAdminStats = async(req: Request, res: Response) => {

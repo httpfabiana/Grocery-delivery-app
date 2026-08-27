@@ -3,8 +3,7 @@ import bcrypt from 'bcrypt';
 import { Request, Response } from "express";
 import { prisma } from "../config/prisma.js";
 import jwt from 'jsonwebtoken';
-import { stat } from 'node:fs';
-import { timeStamp } from 'node:console';
+
 
 const generateToken = (id: string) => {
   return jwt.sign({id, role: "delivery"}, process.env.JWT_SECRET as string, {expiresIn: "30d"})
